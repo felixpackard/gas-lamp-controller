@@ -28,6 +28,7 @@
 
 #include "includes/screen/splash_screen.h"
 #include "includes/screen/idle_screen.h"
+#include "includes/screen/settings_screen.h"
 
 namespace light_controller {
 

@@ -11,7 +11,7 @@ Button button_up = Button(&bounce_up);
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, 4);
 
-// AlarmID_t idle_timer;
+AlarmID_t idle_timer;
 
 // Screen splash_screen("Splash screen", "Splash screen");
 
@@ -33,6 +33,7 @@ AbstractScreen *current_screen = nullptr;
 
 SplashScreen splash_screen(display);
 IdleScreen idle_screen(display);
+SettingsScreen settings_screen(display);
 
 void setup() {
   Serial.begin(9600);
@@ -93,7 +94,8 @@ void setup() {
   // Utils::set_timer(idle_timer, 2, light_controller::show_idle);
   // current_menu = &menu_idle;
 
-  current_screen = &idle_screen;
+  current_screen = &splash_screen;
+  Utils::set_timer(idle_timer, 2, light_controller::show_idle);
 }
 
 void loop() {
@@ -107,6 +109,10 @@ void loop() {
   );
 
   Alarm.delay(0);
+}
+
+void show_idle() {
+  current_screen = &idle_screen;
 }
 
 // void light_controller::show_idle() {
