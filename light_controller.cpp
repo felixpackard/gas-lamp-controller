@@ -11,7 +11,7 @@ Button button_up = Button(&bounce_up);
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, 4);
 
-AlarmID_t idle_timer;
+AlarmID_t splash_screen_timer;
 
 // Screen splash_screen("Splash screen", "Splash screen");
 
@@ -80,9 +80,10 @@ void setup() {
    * Initialize menus
    */
   idle_screen.on_button_pressed(light_controller::idle_button_pressed);
+  settings_screen.on_timeout(light_controller::show_idle);
 
   current_screen = &splash_screen;
-  Utils::set_timer(idle_timer, 2, light_controller::show_idle);
+  Utils::set_timer(splash_screen_timer, 2, light_controller::show_idle);
 }
 
 void loop() {
@@ -99,11 +100,15 @@ void loop() {
 }
 
 void light_controller::show_idle() {
+  idle_screen.init();
   current_screen = &idle_screen;
 }
 
 void light_controller::idle_button_pressed(bool menu_pressed, bool down_pressed, bool up_pressed) {
-  if (menu_pressed) current_screen = &settings_screen;
+  if (menu_pressed) {
+    settings_screen.init();
+    current_screen = &settings_screen;
+  }
 }
 
 // void light_controller::show_idle() {

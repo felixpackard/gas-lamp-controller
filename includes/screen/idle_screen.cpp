@@ -1,10 +1,19 @@
 #include "idle_screen.h"
 using namespace light_controller;
 
+void IdleScreen::init() {
+  timer = millis() + IDLE_UPDATE_FREQ;
+  AbstractScreen::init();
+}
+
 void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
-  if (menu_pressed) {
-    state++;
-    if (state > max_state) state = 0;
+  const unsigned long m = millis();
+
+  if (m > timer) {
+    timer = m + IDLE_UPDATE_FREQ;
+    next_state();
+
+    Serial.println("Idle next state");
   }
 
   time_t t = now();

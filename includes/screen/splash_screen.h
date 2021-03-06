@@ -16,7 +16,6 @@ namespace light_controller {
     // Destructor
     ~SplashScreen() = default;
 
-    // bool update(bool menu_pressed, bool down_pressed, bool up_pressed);
     void render();
 
   };

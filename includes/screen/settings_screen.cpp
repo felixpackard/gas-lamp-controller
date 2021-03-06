@@ -1,10 +1,21 @@
 #include "settings_screen.h"
 using namespace light_controller;
 
+void SettingsScreen::init() {
+  timer = millis() + SCREEN_TIMEOUT;
+  AbstractScreen::init();
+}
+
 void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
+  const unsigned long m = millis();
+
   if (menu_pressed) {
-    state++;
-    if (state > max_state) state = 0;
+    timer = m + SCREEN_TIMEOUT;
+    next_state();
+  }
+
+  if (m > timer) {
+    if (cb_timeout) cb_timeout();
   }
 
   switch (state) {

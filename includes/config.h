@@ -7,6 +7,9 @@ namespace light_controller {
   #define SCREEN_WIDTH 128
   #define SCREEN_HEIGHT 32
 
+  #define IDLE_UPDATE_FREQ 4000
+  #define SCREEN_TIMEOUT 10000
+
   #define BUTTON_PIN_1 8
   #define BUTTON_PIN_2 9
   #define BUTTON_PIN_3 10

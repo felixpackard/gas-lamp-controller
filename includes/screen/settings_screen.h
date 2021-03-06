@@ -2,6 +2,7 @@
 #define SETTINGSSCREEN_H
 
 #include "screen.h"
+#include "../config.h"
 
 namespace light_controller {
 
@@ -9,11 +10,12 @@ namespace light_controller {
   
   public:
     // Constructor
-    SettingsScreen(Adafruit_SSD1306 &display) : AbstractScreen(display) { };
+    SettingsScreen(Adafruit_SSD1306 &display) : AbstractScreen(display, 2) { };
 
     // Destructor
     ~SettingsScreen() = default;
 
+    void init();
     void update(bool menu_pressed, bool down_pressed, bool up_pressed);
     void render();
 
@@ -26,7 +28,6 @@ namespace light_controller {
       SET_PWD
     };
     
-    const uint8_t max_state = 2;
     const char *title = "Settings";
     char data[16];
 
