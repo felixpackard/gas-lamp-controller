@@ -35,6 +35,7 @@ time_t LightService::rise_set_to_time(time_t t, int riseSet) {
 
 void LightService::update() {
   time_t t = now();
+  unsigned long m = millis();
 
   if (t > sunset || t < sunrise) {
     state = ON;
@@ -42,6 +43,17 @@ void LightService::update() {
   } else {
     state = OFF;
     next_action_time = next_sunset;
+  }
+
+  if (bri_multiplier < 1 && state == ON)  bri_multiplier = constrain(bri_multiplier + FADE_SPEED, 0, 1);
+  if (bri_multiplier > 0 && state == OFF) bri_multiplier = constrain(bri_multiplier - FADE_SPEED, 0, 1);
+  
+  if (m > bri_next_update) {
+    bri_next_update = m + BRI_INTERVAL;
+    brightness += round(random(-RANDOM_AMOUNT, RANDOM_AMOUNT));
+    brightness = constrain(brightness, MIN_BRIGHTNESS, MAX_BRIGHTNESS);
+
+    analogWrite(LIGHT_PIN, brightness * bri_multiplier);
   }
 }
 

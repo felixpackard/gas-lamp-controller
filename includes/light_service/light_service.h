@@ -44,6 +44,10 @@ namespace light_controller {
     LightState state;
     time_t next_action_time;
 
+    uint8_t brightness;
+    uint8_t bri_multiplier;
+    unsigned long bri_next_update;
+
   };
 
 };

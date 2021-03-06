@@ -9,6 +9,13 @@ namespace light_controller {
   #define DST_START {"GMT", Last, Sun, Mar, 1, 60}
   #define STD_START {"GMT", Last, Sun, Oct, 2, 0}
 
+  #define LIGHT_PIN 6
+  #define MIN_BRIGHTNESS 100
+  #define MAX_BRIGHTNESS 255
+  #define RANDOM_AMOUNT 15
+  #define BRI_INTERVAL 25
+  #define FADE_SPEED 0.001
+
   #define MAX_SCREENS 4
   #define SCREEN_WIDTH 128
   #define SCREEN_HEIGHT 32
