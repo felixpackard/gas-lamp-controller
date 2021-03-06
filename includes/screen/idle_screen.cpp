@@ -20,7 +20,7 @@ void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
       break;
   }
 
-  render();
+  AbstractScreen::update(menu_pressed, down_pressed, up_pressed);
 }
 
 void IdleScreen::render() {

@@ -79,20 +79,7 @@ void setup() {
   /*
    * Initialize menus
    */
-  // menu_init.add_screen(splash_screen);
-
-  // menu_idle.add_screen(idle_current_time);
-  // menu_idle.add_screen(idle_current_date);
-  // menu_idle.add_screen(idle_next_action);
-
-  // menu_settings.add_screen(settings_set_time);
-  // menu_settings.add_screen(settings_set_date);
-  // menu_settings.add_screen(settings_set_mode);
-
-  // settings.render(display);
-  // menu_init.render(display);
-  // Utils::set_timer(idle_timer, 2, light_controller::show_idle);
-  // current_menu = &menu_idle;
+  idle_screen.on_button_pressed(light_controller::idle_button_pressed);
 
   current_screen = &splash_screen;
   Utils::set_timer(idle_timer, 2, light_controller::show_idle);
@@ -111,8 +98,12 @@ void loop() {
   Alarm.delay(0);
 }
 
-void show_idle() {
+void light_controller::show_idle() {
   current_screen = &idle_screen;
+}
+
+void light_controller::idle_button_pressed(bool menu_pressed, bool down_pressed, bool up_pressed) {
+  if (menu_pressed) current_screen = &settings_screen;
 }
 
 // void light_controller::show_idle() {

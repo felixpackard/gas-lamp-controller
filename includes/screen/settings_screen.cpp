@@ -7,8 +7,6 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
     if (state > max_state) state = 0;
   }
 
-  time_t t = now();
-
   switch (state) {
     case SET_TIME:
       set_data("Set time");
@@ -21,7 +19,7 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
       break;
   }
 
-  render();
+  AbstractScreen::update(menu_pressed, down_pressed, up_pressed);
 }
 
 void SettingsScreen::render() {

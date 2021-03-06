@@ -32,16 +32,6 @@
 
 namespace light_controller {
 
-  /**
-   * @brief Refers to the current menu that's active.
-   * 
-   */
-  enum LightControllerMenu {
-    INIT,
-    IDLE,
-    SETTINGS
-  };
-
   // #define BUTTON_REPEAT_DELAY 750
   // #define BUTTON_REPEAT_FREQ 100
 
@@ -62,16 +52,22 @@ namespace light_controller {
   // #define MENU_TIMEOUT 10
 
   /**
-   * @brief Renders the currently active Menu
+   * @brief Renders the currently active Screen
    * 
    */
   void render();
 
   /**
-   * @brief Sets the current Menu to idle
+   * @brief Sets the current Screen to idle
    * 
    */
   void show_idle();
+
+  /**
+   * @brief Handles button presses whilst the idle Screen is shown
+   * 
+   */
+  void idle_button_pressed(bool menu_pressed, bool down_pressed, bool up_pressed);
 
 }
 
