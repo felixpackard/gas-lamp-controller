@@ -27,6 +27,16 @@ void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
       set_title("Current date");
       format_date(data, t);
       break;
+    case NEXT_ACTION:
+      if (light_service.get_state() == ON) {
+        set_title("Turning off at");
+      } else {
+        set_title("Turning on at");
+      }
+
+      time_t next_action_time = light_service.get_next_action_time();
+      format_time(data, next_action_time);
+      break;
   }
 
   AbstractScreen::update(menu_pressed, down_pressed, up_pressed);

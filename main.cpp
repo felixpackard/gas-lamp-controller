@@ -1,4 +1,4 @@
-#include "light_controller.h"
+#include "main.h"
 using namespace light_controller;
 
 Bounce bounce_menu = Bounce();
@@ -13,21 +13,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, 4);
 
 AlarmID_t splash_screen_timer;
 
-// Screen splash_screen("Splash screen", "Splash screen");
-
-// Screen idle_current_time("Current time");
-// Screen idle_current_date("Current date");
-// Screen idle_next_action;
-
-// Screen settings_set_time("Menu", "Set time");
-// Screen settings_set_date("Menu", "Set date");
-// Screen settings_set_mode("Menu", "Select mode");
-
-// Menu menu_init;
-// Menu menu_idle;
-// Menu menu_settings;
-
-// Menu *current_menu = nullptr;
+LightService &light_service = LightService::get_instance();
 
 AbstractScreen *current_screen = nullptr;
 
@@ -77,6 +63,13 @@ void setup() {
   }
 
   /*
+   * Initialize LightService
+   */
+  light_service.update_rise_set();
+
+  Alarm.alarmRepeat(0, 0, 5, light_controller::daily_alarm_triggered);
+
+  /*
    * Initialize menus
    */
   idle_screen.on_button_pressed(light_controller::idle_button_pressed);
@@ -87,6 +80,11 @@ void setup() {
 }
 
 void loop() {
+  /*
+   * Update light service
+   */
+  light_service.update();
+
   /*
    * Update and render current menu
    */
@@ -109,6 +107,10 @@ void light_controller::idle_button_pressed(bool menu_pressed, bool down_pressed,
     settings_screen.init();
     current_screen = &settings_screen;
   }
+}
+
+void light_controller::daily_alarm_triggered() {
+  light_service.update_rise_set();
 }
 
 // void light_controller::show_idle() {
@@ -238,37 +240,8 @@ void light_controller::idle_button_pressed(bool menu_pressed, bool down_pressed,
 //   pinMode(LIGHT_PIN, OUTPUT);
 //   randomSeed(analogRead(0));
 
-//   // Create menu
-//   Menu menu = Menu(menuUseEvent, menuMoveEvent);
-
-//   MenuItem time = MenuItem(menu, "Menu", "Set time");
-//   MenuItem date = MenuItem(menu, "Menu", "Set date");
-//   MenuItem mode = MenuItem(menu, "Menu", "Select mode");
-
-//   MenuItem modeAutomatic = MenuItem(menu, "Select mode", "Automatic");
-//   MenuItem modeManual = MenuItem(menu, " Select mode", "Manual");
-
-//   menu.getRoot().addChild(time);
-
-//   time.addNext(date);
-//   date.addNext(mode);
-//   mode.addNext(time);
-
-//   mode.addChild(modeAutomatic);
-
-//   modeAutomatic.addNext(modeManual);
-//   modeManual.addNext(modeAutomatic);
-
 //   // Draw the splash screen
 //   drawSplashScreen();
-// }
-
-// void menuUseEvent() {
-//   Serial.println("[INFO] Used menu item.");
-// }
-
-// void menuMoveEvent() {
-//   Serial.println("[INFO] Moved menu.");
 // }
 
 // void loop () {

@@ -26,6 +26,8 @@
 #include "includes/utils/utils.h"
 #include "includes/button/button.h"
 
+#include "includes/light_service/light_service.h"
+
 #include "includes/screen/splash_screen.h"
 #include "includes/screen/idle_screen.h"
 #include "includes/screen/settings_screen.h"
@@ -68,6 +70,12 @@ namespace light_controller {
    * 
    */
   void idle_button_pressed(bool menu_pressed, bool down_pressed, bool up_pressed);
+
+  /**
+   * @brief Runs when the daily alarm is triggered
+   * 
+   */
+  void daily_alarm_triggered();
 
 }
 

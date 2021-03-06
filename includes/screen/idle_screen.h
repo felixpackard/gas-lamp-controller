@@ -1,8 +1,10 @@
-#ifndef IdleScreen_H
-#define IdleScreen_H
+#ifndef IDLESCREEN_H
+#define IDLESCREEN_H
 
 #include "screen.h"
 #include "../config.h"
+#include "../utils/utils.h"
+#include "../light_service/light_service.h"
 
 namespace light_controller {
 
@@ -10,7 +12,7 @@ namespace light_controller {
 
   public:
     // Constructor
-    IdleScreen(Adafruit_SSD1306 &display) : AbstractScreen(display, 1) { };
+    IdleScreen(Adafruit_SSD1306 &display) : AbstractScreen(display, 2), light_service(LightService::get_instance()) { };
 
     // Destructor
     ~IdleScreen() = default;
@@ -24,12 +26,14 @@ namespace light_controller {
 
     enum IdleScreenState {
       CURRENT_TIME,
-      CURRENT_DATE
-      // TODO: Complete enum
+      CURRENT_DATE,
+      NEXT_ACTION
     };
     
     char title[16];
     char data[16];
+
+    LightService &light_service;
 
   };
 

@@ -3,6 +3,12 @@
 
 namespace light_controller {
 
+  #define LATITUDE 54.068241
+  #define LONGITUDE -2.277658
+  #define UTC_OFFSET 0
+  #define DST_START {"GMT", Last, Sun, Mar, 1, 60}
+  #define STD_START {"GMT", Last, Sun, Oct, 2, 0}
+
   #define MAX_SCREENS 4
   #define SCREEN_WIDTH 128
   #define SCREEN_HEIGHT 32
