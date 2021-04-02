@@ -36,15 +36,15 @@ void SetDateScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed
     int8_t modifier = down_pressed ? -1 : 1;
 
     switch (state) {
-      case SET_YEAR:
+      case SetDateScreenState::SET_YEAR:
         adjusted_date.Day = constrain(adjusted_date.Day, 1, Utils::count_days_in_month(adjusted_date.Month, max(adjusted_date.Year + modifier, 50)));
         adjusted_date.Year = max(adjusted_date.Year + modifier, 50);
         break;
-      case SET_MONTH:
+      case SetDateScreenState::SET_MONTH:
         adjusted_date.Day = constrain(adjusted_date.Day, 1, Utils::count_days_in_month(constrain(adjusted_date.Month + modifier, 1, 12), adjusted_date.Year));
         adjusted_date.Month = constrain(adjusted_date.Month + modifier, 1, 12);
         break;
-      case SET_DAY:
+      case SetDateScreenState::SET_DAY:
         adjusted_date.Day = constrain(adjusted_date.Day + modifier, 1, Utils::count_days_in_month(adjusted_date.Month, adjusted_date.Year));
         break;
     }
@@ -65,13 +65,13 @@ void SetDateScreen::render() {
 
   if (millis() / 500 % 2 == 0) {
     switch (state) {
-      case SET_YEAR:
+      case SetDateScreenState::SET_YEAR:
         display.drawFastHLine(4, 31, 48, SSD1306_WHITE);
         break;
-      case SET_MONTH:
+      case SetDateScreenState::SET_MONTH:
         display.drawFastHLine(64, 31, 22, SSD1306_WHITE);
         break;
-      case SET_DAY:
+      case SetDateScreenState::SET_DAY:
         display.drawFastHLine(100, 31, 22, SSD1306_WHITE);
         break;
     }

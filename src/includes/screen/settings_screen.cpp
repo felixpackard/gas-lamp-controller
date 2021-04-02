@@ -23,13 +23,13 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
   }
 
   switch (state) {
-    case SET_TIME:
+    case SettingsScreenState::SET_TIME:
       set_string(data, PSTR("Set time"));
       break;
-    case SET_DATE:
+    case SettingsScreenState::SET_DATE:
       set_string(data, PSTR("Set date"));
       break;
-    case SET_MODE:
+    case SettingsScreenState::SET_MODE:
       set_string(data, PSTR("Set mode"));
       break;
   }

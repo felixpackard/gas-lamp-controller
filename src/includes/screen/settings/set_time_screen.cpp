@@ -29,10 +29,10 @@ void SetTimeScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed
     int8_t modifier = down_pressed ? -1 : 1;
 
     switch (state) {
-      case SET_HOUR:
+      case SetTimeScreenState::SET_HOUR:
         adjusted_time.Hour = constrain(adjusted_time.Hour + modifier, 0, 23);
         break;
-      case SET_MINUTE:
+      case SetTimeScreenState::SET_MINUTE:
         adjusted_time.Minute = constrain(adjusted_time.Minute + modifier, 0, 59);
         break;
     }
@@ -52,7 +52,7 @@ void SetTimeScreen::render() {
   write_data(title, buffer);
 
   if (millis() / 500 % 2 == 0) {
-    display.drawFastHLine(state == SET_HOUR ? 4 : 40, 31, 22, SSD1306_WHITE);
+    display.drawFastHLine(state == SetTimeScreenState::SET_HOUR ? 4 : 40, 31, 22, SSD1306_WHITE);
   }
 
   display.display();

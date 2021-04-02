@@ -11,22 +11,6 @@ namespace light_controller {
 
   typedef void (*TimerEvent)();
 
-  /**
-   * @brief Refers to the severity level of a log message.
-   * 
-   */
-  enum LogLevel {
-    INFO,
-    WARNING,
-    ERROR
-  };
-
-  const char * const LogLevelString[] = {
-    "[INFO] ",
-    "[WARN] ",
-    "[ERR] "
-  };
-
   const uint8_t days_per_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
   #define leap_year(y) ( ((1970+(y))>0) && !((1970+(y))%4) && ( ((1970+(y))%100) || !((1970+(y))%400) ) )

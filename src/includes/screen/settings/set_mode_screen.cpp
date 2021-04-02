@@ -29,13 +29,13 @@ void SetModeScreen::render() {
   char buffer[7];
 
   switch (state) {
-    case MODE_AUTO:
+    case OperationMode::MODE_AUTO:
       strcpy_P(buffer, PSTR("AUTO"));
       break;
-    case MODE_ON:
+    case OperationMode::MODE_ON:
       strcpy_P(buffer, PSTR("ON"));
       break;
-    case MODE_OFF:
+    case OperationMode::MODE_OFF:
       strcpy_P(buffer, PSTR("OFF"));
       break;
   }

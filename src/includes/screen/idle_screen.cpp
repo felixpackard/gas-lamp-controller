@@ -17,21 +17,16 @@ void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
   time_t t = now();
 
   switch (state) {
-    case CURRENT_TIME:
+    case IdleScreenState::CURRENT_TIME:
       set_title(PSTR("Current time"));
       format_time(data, t);
       break;
-    case CURRENT_DATE:
+    case IdleScreenState::CURRENT_DATE:
       set_title(PSTR("Current date"));
       format_date(data, t);
       break;
-    case NEXT_ACTION:
-      if (light_service.get_state() == STATE_ON) {
-        set_title(PSTR("Turning off at"));
-      } else {
-        set_title(PSTR("Turning on at"));
-      }
-
+    case IdleScreenState::NEXT_ACTION:
+      set_title(light_service.get_state() == LightState::STATE_ON ? PSTR("Turning off at") : PSTR("Turning on at"));
       time_t next_action_time = light_service.get_next_action_time();
       format_time(data, next_action_time);
       break;
