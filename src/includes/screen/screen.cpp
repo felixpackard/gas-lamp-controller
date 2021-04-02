@@ -18,8 +18,8 @@ void AbstractScreen::on_timeout(TimeoutEvent cb) {
   cb_timeout = cb;
 }
 
-void AbstractScreen::write_center(const char *buf, uint8_t x, uint8_t y, uint8_t font_size) {
-  display.setCursor(x - floor(strlen(buf) * ((font_size * 5) + 1) - 1) / 2, y);
+void AbstractScreen::write_center(const char *buf, uint8_t y, uint8_t font_size) {
+  display.setCursor(SCREEN_WIDTH / 2 - floor((strlen(buf) + 1) * ((font_size * 5) + 1) - 1) / 2, y);
   display.write(buf);
 }
 
