@@ -28,6 +28,7 @@
 #include "includes/screen/settings_screen.h"
 #include "includes/screen/settings/set_time_screen.h"
 #include "includes/screen/settings/set_date_screen.h"
+#include "includes/screen/settings/set_mode_screen.h"
 
 namespace light_controller {
 

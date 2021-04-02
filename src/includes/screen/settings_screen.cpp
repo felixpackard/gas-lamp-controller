@@ -29,8 +29,8 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
     case SET_DATE:
       set_string(data, PSTR("Set date"));
       break;
-    case SET_PWD:
-      set_string(data, PSTR("Set pwd"));
+    case SET_MODE:
+      set_string(data, PSTR("Set mode"));
       break;
   }
 

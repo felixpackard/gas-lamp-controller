@@ -9,7 +9,7 @@ namespace light_controller {
   enum SettingsScreenState {
     SET_TIME,
     SET_DATE,
-    SET_PWD
+    SET_MODE
   };
 
   class SettingsScreen : public AbstractScreen {

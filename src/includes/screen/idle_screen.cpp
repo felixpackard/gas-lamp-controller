@@ -26,7 +26,7 @@ void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
       format_date(data, t);
       break;
     case NEXT_ACTION:
-      if (light_service.get_state() == ON) {
+      if (light_service.get_state() == STATE_ON) {
         set_title(PSTR("Turning off at"));
       } else {
         set_title(PSTR("Turning on at"));

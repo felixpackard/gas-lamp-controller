@@ -38,15 +38,17 @@ void LightService::update() {
   unsigned long m = millis();
 
   if (t > sunset || t < sunrise) {
-    state = ON;
+    state = STATE_ON;
     next_action_time = next_sunrise;
   } else {
-    state = OFF;
+    state = STATE_OFF;
     next_action_time = next_sunset;
   }
 
-  if (bri_multiplier < 1 && state == ON)  bri_multiplier = constrain(bri_multiplier + FADE_SPEED, 0, 1);
-  if (bri_multiplier > 0 && state == OFF) bri_multiplier = constrain(bri_multiplier - FADE_SPEED, 0, 1);
+  if (bri_multiplier < 1 && ((state == STATE_ON && mode == MODE_AUTO) || mode == MODE_ON))
+    bri_multiplier = constrain(bri_multiplier + FADE_SPEED, 0, 1);
+  if (bri_multiplier > 0 && ((state == STATE_OFF && mode == MODE_AUTO) || mode == MODE_OFF))
+    bri_multiplier = constrain(bri_multiplier - FADE_SPEED, 0, 1);
   
   if (m - bri_update_timer >= BRI_INTERVAL) {
     bri_update_timer = m;

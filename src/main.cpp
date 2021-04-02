@@ -22,6 +22,7 @@ IdleScreen idle_screen(display);
 SettingsScreen settings_screen(display);
 SetTimeScreen set_time_screen(display);
 SetDateScreen set_date_screen(display);
+SetModeScreen set_mode_screen(display);
 
 void setup() {
   /*
@@ -73,6 +74,7 @@ void setup() {
 
   set_time_screen.on_timeout(light_controller::show_idle);
   set_date_screen.on_timeout(light_controller::show_idle);
+  set_mode_screen.on_timeout(light_controller::show_idle);
 
   current_screen = &splash_screen;
   Utils::set_timer(splash_screen_timer, 2, light_controller::show_idle);
@@ -118,6 +120,10 @@ void light_controller::settings_button_pressed(bool menu_pressed, bool down_pres
       case SettingsScreenState::SET_DATE:
         set_date_screen.init();
         current_screen = &set_date_screen;
+        break;
+      case SettingsScreenState::SET_MODE:
+        set_mode_screen.init();
+        current_screen = &set_mode_screen;
         break;
     }
   }

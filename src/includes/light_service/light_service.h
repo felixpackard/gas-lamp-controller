@@ -10,9 +10,17 @@
 
 namespace light_controller {
 
+  typedef uint8_t LightOperationMode;
+
   enum LightState {
-    ON,
-    OFF
+    STATE_ON,
+    STATE_OFF
+  };
+  
+  enum OperationMode {
+    MODE_AUTO,
+    MODE_ON,
+    MODE_OFF
   };
 
   class LightService {
@@ -24,6 +32,8 @@ namespace light_controller {
 
     LightState get_state();
     time_t get_next_action_time();
+    
+    LightOperationMode mode;
   
   private:
     LightService() : my_tz(tcr_dst, tcr_std), settle(LATITUDE, LONGITUDE, UTC_OFFSET) { };
