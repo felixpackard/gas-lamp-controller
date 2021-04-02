@@ -6,6 +6,12 @@
 
 namespace light_controller {
 
+  enum SettingsScreenState {
+    SET_TIME,
+    SET_DATE,
+    SET_PWD
+  };
+
   class SettingsScreen : public AbstractScreen {
   
   public:
@@ -20,14 +26,6 @@ namespace light_controller {
     void render();
 
   private:
-    void set_data(const char *new_data);
-
-    enum IdleScreenState {
-      SET_TIME,
-      SET_DATE,
-      SET_PWD
-    };
-    
     const char *title = "Settings";
     char data[16];
 

@@ -12,8 +12,6 @@ void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
   if (m > timer) {
     timer = m + IDLE_UPDATE_FREQ;
     next_state();
-
-    Serial.println("Idle next state");
   }
 
   time_t t = now();
@@ -44,6 +42,7 @@ void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
 
 void IdleScreen::render() {
   write_data(title, data);
+  display.display();
 }
 
 void IdleScreen::set_title(const char *new_title) {

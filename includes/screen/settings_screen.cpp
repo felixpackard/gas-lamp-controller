@@ -14,19 +14,23 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
     next_state();
   }
 
+  if (cb_button_pressed) {
+    cb_button_pressed(menu_pressed, down_pressed, up_pressed);
+  }
+  
   if (m > timer) {
     if (cb_timeout) cb_timeout();
   }
 
   switch (state) {
     case SET_TIME:
-      set_data("Set time");
+      set_string(data, "Set time");
       break;
     case SET_DATE:
-      set_data("Set date");
+      set_string(data, "Set date");
       break;
     case SET_PWD:
-      set_data("Set pwd");
+      set_string(data, "Set pwd");
       break;
   }
 
@@ -35,8 +39,5 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
 
 void SettingsScreen::render() {
   write_data(title, data);
-}
-
-void SettingsScreen::set_data(const char *new_data) {
-  strncpy(data, new_data, sizeof(data) - 1);
+  display.display();
 }

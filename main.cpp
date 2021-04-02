@@ -20,6 +20,7 @@ AbstractScreen *current_screen = nullptr;
 SplashScreen splash_screen(display);
 IdleScreen idle_screen(display);
 SettingsScreen settings_screen(display);
+SetTimeScreen set_time_screen(display);
 
 void setup() {
   Serial.begin(9600);
@@ -73,7 +74,11 @@ void setup() {
    * Initialize menus
    */
   idle_screen.on_button_pressed(light_controller::idle_button_pressed);
+
+  settings_screen.on_button_pressed(light_controller::settings_button_pressed);
   settings_screen.on_timeout(light_controller::show_idle);
+
+  set_time_screen.on_timeout(light_controller::show_idle);
 
   current_screen = &splash_screen;
   Utils::set_timer(splash_screen_timer, 2, light_controller::show_idle);
@@ -106,6 +111,17 @@ void light_controller::idle_button_pressed(bool menu_pressed, bool down_pressed,
   if (menu_pressed) {
     settings_screen.init();
     current_screen = &settings_screen;
+  }
+}
+
+void light_controller::settings_button_pressed(bool menu_pressed, bool down_pressed, bool up_pressed) {
+  if (down_pressed || up_pressed) {
+    switch (settings_screen.get_state()) {
+      case SettingsScreenState::SET_TIME:
+        set_time_screen.init();
+        current_screen = &set_time_screen;
+        break;
+    }
   }
 }
 

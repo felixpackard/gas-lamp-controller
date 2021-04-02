@@ -27,9 +27,6 @@ namespace light_controller {
     virtual void render() = 0;
 
     void on_button_pressed(ButtonPressEvent cb);
-    void on_down_pressed(ButtonPressEvent cb);
-    void on_up_pressed(ButtonPressEvent cb);
-
     void on_timeout(TimeoutEvent cb);
 
     ScreenState get_state();

@@ -33,6 +33,7 @@ namespace light_controller {
 
   #define format_time(buffer, t) snprintf(buffer, sizeof(buffer) - 1, "%02d:%02d", hour(t), minute(t))
   #define format_date(buffer, t) snprintf(buffer, sizeof(buffer) - 1, "%02d/%02d/%04d", day(t), month(t), year(t))
+  #define set_string(dest, src) strlcpy(dest, src, sizeof(src))
 
   class Utils {
 

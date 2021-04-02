@@ -31,6 +31,7 @@
 #include "includes/screen/splash_screen.h"
 #include "includes/screen/idle_screen.h"
 #include "includes/screen/settings_screen.h"
+#include "includes/screen/settings/set_time_screen.h"
 
 namespace light_controller {
 
@@ -70,6 +71,12 @@ namespace light_controller {
    * 
    */
   void idle_button_pressed(bool menu_pressed, bool down_pressed, bool up_pressed);
+
+  /**
+   * @brief Handles button presses whilst the settings Screen is shown
+   * 
+   */
+  void settings_button_pressed(bool menu_pressed, bool down_pressed, bool up_pressed);
 
   /**
    * @brief Runs when the daily alarm is triggered

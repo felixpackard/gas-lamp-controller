@@ -8,6 +8,12 @@
 
 namespace light_controller {
 
+  enum IdleScreenState {
+    CURRENT_TIME,
+    CURRENT_DATE,
+    NEXT_ACTION
+  };
+
   class IdleScreen : public AbstractScreen {
 
   public:
@@ -23,12 +29,6 @@ namespace light_controller {
 
   private:
     void set_title(const char *new_title);
-
-    enum IdleScreenState {
-      CURRENT_TIME,
-      CURRENT_DATE,
-      NEXT_ACTION
-    };
     
     char title[16];
     char data[16];

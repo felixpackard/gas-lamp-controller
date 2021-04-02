@@ -34,8 +34,6 @@ void AbstractScreen::write_data(const char *title, const char *data) {
   display.setTextSize(2);
   display.setCursor(4, 14);
   display.write(data);
-
-  display.display();
 }
 
 ScreenState AbstractScreen::get_state() {
@@ -44,7 +42,5 @@ ScreenState AbstractScreen::get_state() {
 
 void AbstractScreen::next_state() {
   state++;
-  Serial.println(state);
-  Serial.println(max_state);
   if (state > max_state) state = 0;
 }
