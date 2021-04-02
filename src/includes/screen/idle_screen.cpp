@@ -46,5 +46,5 @@ void IdleScreen::render() {
 }
 
 void IdleScreen::set_title(const char *new_title) {
-  strlcpy_P(title, new_title, strlen_P(title) + 1);
+  strcpy_P(title, new_title);
 }
