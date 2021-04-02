@@ -49,14 +49,13 @@ namespace light_controller {
     static AlarmID_t set_timer(AlarmID_t timer, int seconds, TimerEvent cb);
 
     /**
-     * @brief Print a debug message to the Serial output
-     * @note only prints the message if DEBUG is enabled
-     * @see config.h
+     * @brief Returns a number of days based on the month and year provided
      * 
-     * @param severity the severity level of the message
-     * @param message the message to write to the Serial output
+     * @param month the month to check the number of days for
+     * @param year the year to check the number of days in the month for
+     * @return int the number of days in the month
      */
-    static void debug(LogLevel severity, const char *message);
+    static uint8_t count_days_in_month(uint8_t month, uint8_t year);
 
   };
 
