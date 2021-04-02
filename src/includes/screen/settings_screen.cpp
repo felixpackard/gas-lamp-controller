@@ -24,13 +24,13 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
 
   switch (state) {
     case SET_TIME:
-      set_string(data, "Set time");
+      set_string(data, PSTR("Set time"));
       break;
     case SET_DATE:
-      set_string(data, "Set date");
+      set_string(data, PSTR("Set date"));
       break;
     case SET_PWD:
-      set_string(data, "Set pwd");
+      set_string(data, PSTR("Set pwd"));
       break;
   }
 

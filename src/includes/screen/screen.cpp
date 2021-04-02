@@ -1,8 +1,17 @@
 #include "screen.h"
 using namespace light_controller;
 
+// int freeRam() {
+//   extern int __heap_start, *__brkval; 
+//   int v; 
+//   return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval); 
+// }
+
 void AbstractScreen::init() {
   state = 0;
+
+  // Serial.println("AbstractScreen::init");
+  // Serial.println(freeRam());
 }
 
 void AbstractScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
@@ -18,7 +27,7 @@ void AbstractScreen::on_timeout(TimeoutEvent cb) {
   cb_timeout = cb;
 }
 
-void AbstractScreen::write_center(const char *buf, int x, int y, int font_size) {
+void AbstractScreen::write_center(const char *buf, uint8_t x, uint8_t y, uint8_t font_size) {
   display.setCursor(x - floor(strlen(buf) * ((font_size * 5) + 1) - 1) / 2, y);
   display.write(buf);
 }

@@ -18,18 +18,18 @@ void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
 
   switch (state) {
     case CURRENT_TIME:
-      set_title("Current time");
+      set_title(PSTR("Current time"));
       format_time(data, t);
       break;
     case CURRENT_DATE:
-      set_title("Current date");
+      set_title(PSTR("Current date"));
       format_date(data, t);
       break;
     case NEXT_ACTION:
       if (light_service.get_state() == ON) {
-        set_title("Turning off at");
+        set_title(PSTR("Turning off at"));
       } else {
-        set_title("Turning on at");
+        set_title(PSTR("Turning on at"));
       }
 
       time_t next_action_time = light_service.get_next_action_time();
@@ -46,5 +46,5 @@ void IdleScreen::render() {
 }
 
 void IdleScreen::set_title(const char *new_title) {
-  strncpy(title, new_title, sizeof(title) - 1);
+  strlcpy_P(title, new_title, strlen_P(title) + 1);
 }

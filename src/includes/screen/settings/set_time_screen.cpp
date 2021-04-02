@@ -26,8 +26,7 @@ void SetTimeScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed
   } else if (down_pressed || up_pressed) {
     timer = m;
 
-    int modifier = 1;
-    if (down_pressed) modifier = -1;
+    int8_t modifier = down_pressed ? -1 : 1;
 
     switch (state) {
       case SET_HOUR:
@@ -41,15 +40,6 @@ void SetTimeScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed
 
   if (m - timer >= SCREEN_TIMEOUT) {
     if (cb_timeout) cb_timeout();
-  }
-
-  switch (state) {
-    case SET_HOUR:
-      set_string(data, "Set hour");
-      break;
-    case SET_MINUTE:
-      set_string(data, "Set minute");
-      break;
   }
 
   AbstractScreen::update(menu_pressed, down_pressed, up_pressed);

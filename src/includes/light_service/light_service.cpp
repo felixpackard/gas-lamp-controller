@@ -21,16 +21,16 @@ void LightService::update_rise_set() {
   next_sunset = rise_set_to_time(tomorrow, settle.sunset(year(tomorrow), month(tomorrow), day(tomorrow), dstTomorrow));
 }
 
-time_t LightService::rise_set_to_time(time_t t, int riseSet) {
-  tmElements_t timeElements;
-  breakTime(t, timeElements);
+time_t LightService::rise_set_to_time(time_t t, uint8_t rise_set) {
+  tmElements_t time_elements;
+  breakTime(t, time_elements);
 
-  timeElements.Second = 0;
+  time_elements.Second = 0;
   
-  timeElements.Hour = floor(riseSet / 60);
-  timeElements.Minute = floor(riseSet % 60);
+  time_elements.Hour = floor(rise_set / 60);
+  time_elements.Minute = floor(rise_set % 60);
 
-  return makeTime(timeElements);
+  return makeTime(time_elements);
 }
 
 void LightService::update() {

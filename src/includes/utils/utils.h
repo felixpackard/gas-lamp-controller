@@ -27,13 +27,14 @@ namespace light_controller {
     "[ERR] "
   };
 
-  const int daysPerMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+  const uint8_t days_per_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
   #define leap_year(y) ( ((1970+(y))>0) && !((1970+(y))%4) && ( ((1970+(y))%100) || !((1970+(y))%400) ) )
 
-  #define format_time(buffer, t) snprintf(buffer, sizeof(buffer) - 1, "%02d:%02d", hour(t), minute(t))
-  #define format_date(buffer, t) snprintf(buffer, sizeof(buffer) - 1, "%02d/%02d/%04d", day(t), month(t), year(t))
-  #define set_string(dest, src) strlcpy(dest, src, sizeof(src))
+  #define format_time(buffer, t) snprintf_P(buffer, sizeof(buffer) - 1, PSTR("%02d:%02d"), hour(t), minute(t))
+  #define format_date(buffer, t) snprintf_P(buffer, sizeof(buffer) - 1, PSTR("%02d/%02d/%04d"), day(t), month(t), year(t))
+  #define format_date_reverse(buffer, t) snprintf_P(buffer, sizeof(buffer) - 1, PSTR("%04d/%02d/%02d"), year(t), month(t), day(t))
+  #define set_string(dest, src) strlcpy_P(dest, src, strlen_P(src) + 1)
 
   class Utils {
 

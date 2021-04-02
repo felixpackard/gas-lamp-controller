@@ -7,8 +7,13 @@ void SplashScreen::render() {
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
 
-  write_center("Settle", SCREEN_WIDTH / 2, 1, 2);
-  write_center("Hackspace", SCREEN_WIDTH / 2, 17, 2);
+  char buf[10];
+
+  strcpy_P(buf, PSTR("Settle"));
+  write_center(buf, SCREEN_WIDTH / 2, 1, 2);
+
+  strcpy_P(buf, PSTR("Hackspace"));
+  write_center(buf, SCREEN_WIDTH / 2, 17, 2);
 
   display.display();
 }

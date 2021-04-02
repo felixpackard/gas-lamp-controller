@@ -21,10 +21,11 @@ SplashScreen splash_screen(display);
 IdleScreen idle_screen(display);
 SettingsScreen settings_screen(display);
 SetTimeScreen set_time_screen(display);
+SetDateScreen set_date_screen(display);
 
 void setup() {
-  Serial.begin(9600);
-  while (!Serial);
+  // Serial.begin(9600);
+  // while (!Serial);
 
   /*
    * Initialize buttons
@@ -45,7 +46,7 @@ void setup() {
    * Initialize display
    */
   if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    Utils::debug(LogLevel::ERROR, "Could not find display.");
+    // Serial.println(F("[ERR] Could not find display."));
     while (1);
   }
 
@@ -55,12 +56,12 @@ void setup() {
   setSyncProvider(RTC.get);
 
   if (timeStatus() != timeSet) {
-    Utils::debug(LogLevel::WARNING, "RTC time was not set. Loading default time.");
+    // Serial.println(F("[WARN] RTC time was not set. Loading default time."));
 
     RTC.set((unsigned long) DEFAULT_TIME);
     setTime((unsigned long) DEFAULT_TIME);
   } else {
-    Utils::debug(LogLevel::INFO, "Loaded time from RTC.");
+    // Serial.println(F("[INFO] Loaded time from RTC."));
   }
 
   /*
@@ -79,6 +80,7 @@ void setup() {
   settings_screen.on_timeout(light_controller::show_idle);
 
   set_time_screen.on_timeout(light_controller::show_idle);
+  set_date_screen.on_timeout(light_controller::show_idle);
 
   current_screen = &splash_screen;
   Utils::set_timer(splash_screen_timer, 2, light_controller::show_idle);
@@ -120,6 +122,10 @@ void light_controller::settings_button_pressed(bool menu_pressed, bool down_pres
       case SettingsScreenState::SET_TIME:
         set_time_screen.init();
         current_screen = &set_time_screen;
+        break;
+      case SettingsScreenState::SET_DATE:
+        set_date_screen.init();
+        current_screen = &set_date_screen;
         break;
     }
   }

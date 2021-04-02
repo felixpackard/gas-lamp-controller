@@ -28,7 +28,7 @@ namespace light_controller {
   private:
     LightService() : my_tz(tcr_dst, tcr_std), settle(LATITUDE, LONGITUDE, UTC_OFFSET) { };
 
-    time_t rise_set_to_time(time_t t, int riseSet);
+    time_t rise_set_to_time(time_t t, uint8_t riseSet);
     
     TimeChangeRule tcr_dst = DST_START;
     TimeChangeRule tcr_std = STD_START;

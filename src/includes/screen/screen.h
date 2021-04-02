@@ -34,7 +34,7 @@ namespace light_controller {
   
   protected:
     void next_state();
-    void write_center(const char *buf, int x, int y, int font_size);
+    void write_center(const char *buf, uint8_t x, uint8_t y, uint8_t font_size);
     void write_data(const char *title, const char *data);
 
     ButtonPressEvent cb_button_pressed;
