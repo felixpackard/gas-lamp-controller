@@ -18,7 +18,8 @@ namespace light_controller {
   
   private:
     Bounce *btn;
-    unsigned long next_trigger = 0;
+    unsigned long trigger_timer;
+    unsigned int retrigger_delay;
 
   };
 

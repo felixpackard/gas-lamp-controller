@@ -2,15 +2,15 @@
 using namespace light_controller;
 
 void IdleScreen::init() {
-  timer = millis() + IDLE_UPDATE_FREQ;
+  timer = millis();
   AbstractScreen::init();
 }
 
 void IdleScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {
   const unsigned long m = millis();
 
-  if (m > timer) {
-    timer = m + IDLE_UPDATE_FREQ;
+  if (m - timer >= IDLE_UPDATE_FREQ) {
+    timer = m;
     next_state();
   }
 

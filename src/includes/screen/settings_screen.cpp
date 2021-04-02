@@ -2,7 +2,7 @@
 using namespace light_controller;
 
 void SettingsScreen::init() {
-  timer = millis() + SCREEN_TIMEOUT;
+  timer = millis();
   AbstractScreen::init();
 }
 
@@ -10,7 +10,7 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
   const unsigned long m = millis();
 
   if (menu_pressed) {
-    timer = m + SCREEN_TIMEOUT;
+    timer = m;
     next_state();
   }
 
@@ -18,7 +18,7 @@ void SettingsScreen::update(bool menu_pressed, bool down_pressed, bool up_presse
     cb_button_pressed(menu_pressed, down_pressed, up_pressed);
   }
   
-  if (m > timer) {
+  if (m - timer >= SCREEN_TIMEOUT) {
     if (cb_timeout) cb_timeout();
   }
 

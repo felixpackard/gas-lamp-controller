@@ -5,12 +5,14 @@ bool Button::update() {
   btn->update();
 
   if (btn->fell()) {
-    next_trigger = millis() + BUTTON_REPEAT_DELAY;
+    trigger_timer = millis();
+    retrigger_delay = BUTTON_REPEAT_DELAY;
     return true;
   }
   
-  if (btn->read() == LOW && millis() > next_trigger) {
-    next_trigger = millis() + BUTTON_REPEAT_FREQ;
+  if (btn->read() == LOW && millis() - trigger_timer >= retrigger_delay) {
+    trigger_timer = millis();
+    retrigger_delay = BUTTON_REPEAT_FREQ;
     return true;
   }
   
