@@ -14,7 +14,7 @@ namespace light_controller {
   #define MAX_BRIGHTNESS 255
   #define RANDOM_AMOUNT 15
   #define BRI_INTERVAL 25
-  #define FADE_SPEED 0.001
+  #define FADE_SPEED 0.01
 
   #define MAX_SCREENS 4
   #define SCREEN_WIDTH 128

@@ -9,19 +9,19 @@ LightService &LightService::get_instance() {
 void LightService::update_rise_set() {
   time_t today = now();
   time_t tomorrow = today + 86400;
-  bool dstToday = my_tz.locIsDST(today);
-  bool dstTomorrow = my_tz.locIsDST(tomorrow);
+  bool dst_today = my_tz.locIsDST(today);
+  bool dst_tomorrow = my_tz.locIsDST(tomorrow);
 
   // Update sunrise and sunset for today
-  sunrise = rise_set_to_time(today, settle.sunrise(year(), month(), day(), dstToday));
-  sunset = rise_set_to_time(today, settle.sunset(year(), month(), day(), dstToday));
+  sunrise = rise_set_to_time(today, settle.sunrise(year(), month(), day(), dst_today));
+  sunset = rise_set_to_time(today, settle.sunset(year(), month(), day(), dst_today));
 
   // Update sunrise and sunset for tomorrow
-  next_sunrise = rise_set_to_time(tomorrow, settle.sunrise(year(tomorrow), month(tomorrow), day(tomorrow), dstTomorrow));
-  next_sunset = rise_set_to_time(tomorrow, settle.sunset(year(tomorrow), month(tomorrow), day(tomorrow), dstTomorrow));
+  next_sunrise = rise_set_to_time(tomorrow, settle.sunrise(year(tomorrow), month(tomorrow), day(tomorrow), dst_tomorrow));
+  next_sunset = rise_set_to_time(tomorrow, settle.sunset(year(tomorrow), month(tomorrow), day(tomorrow), dst_tomorrow));
 }
 
-time_t LightService::rise_set_to_time(time_t t, uint8_t rise_set) {
+time_t LightService::rise_set_to_time(time_t t, int rise_set) {
   tmElements_t time_elements;
   breakTime(t, time_elements);
 
@@ -48,8 +48,8 @@ void LightService::update() {
   if (bri_multiplier < 1 && state == ON)  bri_multiplier = constrain(bri_multiplier + FADE_SPEED, 0, 1);
   if (bri_multiplier > 0 && state == OFF) bri_multiplier = constrain(bri_multiplier - FADE_SPEED, 0, 1);
   
-  if (m > bri_next_update) {
-    bri_next_update = m + BRI_INTERVAL;
+  if (m - bri_update_timer >= BRI_INTERVAL) {
+    bri_update_timer = m;
     brightness += round(random(-RANDOM_AMOUNT, RANDOM_AMOUNT));
     brightness = constrain(brightness, MIN_BRIGHTNESS, MAX_BRIGHTNESS);
 
