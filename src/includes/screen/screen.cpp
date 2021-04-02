@@ -1,17 +1,8 @@
 #include "screen.h"
 using namespace light_controller;
 
-// int freeRam() {
-//   extern int __heap_start, *__brkval; 
-//   int v; 
-//   return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval); 
-// }
-
 void AbstractScreen::init() {
   state = 0;
-
-  // Serial.println("AbstractScreen::init");
-  // Serial.println(freeRam());
 }
 
 void AbstractScreen::update(bool menu_pressed, bool down_pressed, bool up_pressed) {

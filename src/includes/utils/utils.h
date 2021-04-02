@@ -61,45 +61,4 @@ namespace light_controller {
 
 };
 
-// namespace light_controller {
-//   class Utils {
-    
-//   public:
-//     static time_t riseSetToTime(time_t t, int riseSet) {
-//       tmElements_t timeElements;
-//       breakTime(t, timeElements);
-
-//       timeElements.Second = 0;
-      
-//       timeElements.Hour = floor(riseSet / 60);
-//       timeElements.Minute = floor(riseSet % 60);
-    
-//       return makeTime(timeElements);
-//     }
-
-//     static int countDaysInMonth(int m, int y) {
-//       int days = daysPerMonth[m - 1];
-//       if (m - 1 == 1 && LEAP_YEAR(y)) days++;
-//       return days;
-//     }
-
-//     static void formatDate(char* buffer, time_t t) {
-//       sprintf(buffer, "%02d/%02d/%04d", day(t), month(t), year(t));
-//     }
-
-//     static void formatDateReverse(char* buffer, time_t t) {
-//       sprintf(buffer, "%04d/%02d/%02d", year(t), month(t), day(t));
-//     }
-
-//     static void formatTime(char* buffer, time_t t) {
-//       sprintf(buffer, "%02d:%02d", hour(t), minute(t));
-//     }
-
-//     static void formatDateTime(char* buffer, time_t t) {
-//       sprintf(buffer, "%02d/%02d/%02d %02d:%02d", day(t), month(t), year(t), hour(t), minute(t));
-//     }
-    
-//   };
-// }
-
 #endif
