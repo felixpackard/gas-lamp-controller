@@ -3,6 +3,7 @@ using namespace light_controller;
 
 void SetModeScreen::init() {
   timer = millis();
+  state = light_service.mode;
   AbstractScreen::init();
 }
 
