@@ -39,10 +39,10 @@ void LightService::update() {
 
   if (t > sunset || t < sunrise) {
     state = LightState::STATE_ON;
-    next_action_time = next_sunrise;
+    next_action_time = t < sunrise ? sunrise : next_sunrise;
   } else {
     state = LightState::STATE_OFF;
-    next_action_time = next_sunset;
+    next_action_time = sunset;
   }
 
   if (bri_multiplier < 1 && ((state == LightState::STATE_ON && mode == OperationMode::MODE_AUTO) || mode == OperationMode::MODE_ON))
