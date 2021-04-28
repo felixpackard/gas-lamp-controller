@@ -25,6 +25,8 @@ SetDateScreen set_date_screen(display);
 SetModeScreen set_mode_screen(display);
 
 void setup() {
+  Serial.begin(9600);
+  
   /*
    * Initialize buttons
    */

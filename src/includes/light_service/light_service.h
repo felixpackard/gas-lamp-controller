@@ -1,6 +1,7 @@
 #ifndef LIGHTSERVICE_H
 #define LIGHTSERVICE_H
 
+#include <Arduino.h>
 #include <Time.h>
 #include <TimeAlarms.h>
 #include <Timezone.h>
