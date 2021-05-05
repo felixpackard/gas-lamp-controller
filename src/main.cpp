@@ -73,8 +73,8 @@ void setup() {
   settings_screen.on_button_pressed(light_controller::settings_button_pressed);
   settings_screen.on_timeout(light_controller::show_idle);
 
-  set_time_screen.on_timeout(light_controller::set_time_screen_timeout);
-  set_date_screen.on_timeout(light_controller::show_idle);
+  set_time_screen.on_timeout(light_controller::update_daily_alarm);
+  set_date_screen.on_timeout(light_controller::update_daily_alarm);
   set_mode_screen.on_timeout(light_controller::show_idle);
 
   current_screen = &splash_screen;
@@ -130,7 +130,7 @@ void light_controller::settings_button_pressed(bool menu_pressed, bool down_pres
   }
 }
 
-void light_controller::set_time_screen_timeout() {
+void light_controller::update_daily_alarm() {
   /*
    * Restart the repeating alarm after the time has been set, or it won't be triggered
    */

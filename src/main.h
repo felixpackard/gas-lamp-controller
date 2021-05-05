@@ -45,10 +45,10 @@ namespace light_controller {
   void show_idle();
 
   /**
-   * @brief Handles the set time screen timing out or being closed
+   * @brief Updates the daily alarm after the system time or date has been changed
    * 
    */
-  void set_time_screen_timeout();
+  void update_daily_alarm();
 
   /**
    * @brief Handles button presses whilst the idle Screen is shown
