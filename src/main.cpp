@@ -11,6 +11,7 @@ Button button_up = Button(&bounce_up);
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, 4);
 
+AlarmID_t daily_alarm;
 AlarmID_t splash_screen_timer;
 
 LightService &light_service = LightService::get_instance();
@@ -25,8 +26,6 @@ SetDateScreen set_date_screen(display);
 SetModeScreen set_mode_screen(display);
 
 void setup() {
-  Serial.begin(9600);
-  
   /*
    * Initialize buttons
    */
@@ -63,8 +62,8 @@ void setup() {
    * Initialize LightService
    */
   light_service.update_rise_set();
-
-  Alarm.alarmRepeat(0, 0, 5, light_controller::daily_alarm_triggered);
+  Utils::set_repeating_alarm(daily_alarm, DAILY_UPDATE_HOURS, DAILY_UPDATE_MINUTES, DAILY_UPDATE_SECONDS, light_controller::daily_alarm_triggered);
+  // daily_alarm = Alarm.alarmRepeat(0, 0, 5, light_controller::daily_alarm_triggered);
 
   /*
    * Initialize menus
@@ -74,7 +73,7 @@ void setup() {
   settings_screen.on_button_pressed(light_controller::settings_button_pressed);
   settings_screen.on_timeout(light_controller::show_idle);
 
-  set_time_screen.on_timeout(light_controller::show_idle);
+  set_time_screen.on_timeout(light_controller::set_time_screen_timeout);
   set_date_screen.on_timeout(light_controller::show_idle);
   set_mode_screen.on_timeout(light_controller::show_idle);
 
@@ -129,6 +128,14 @@ void light_controller::settings_button_pressed(bool menu_pressed, bool down_pres
         break;
     }
   }
+}
+
+void light_controller::set_time_screen_timeout() {
+  /*
+   * Restart the repeating alarm after the time has been set, or it won't be triggered
+   */
+  Utils::set_repeating_alarm(daily_alarm, DAILY_UPDATE_HOURS, DAILY_UPDATE_MINUTES, DAILY_UPDATE_SECONDS, light_controller::daily_alarm_triggered);
+  show_idle();
 }
 
 void light_controller::daily_alarm_triggered() {

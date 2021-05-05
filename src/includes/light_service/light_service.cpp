@@ -19,12 +19,6 @@ void LightService::update_rise_set() {
   // Update sunrise and sunset for tomorrow
   next_sunrise = rise_set_to_time(tomorrow, settle.sunrise(year(tomorrow), month(tomorrow), day(tomorrow), dst_tomorrow));
   next_sunset = rise_set_to_time(tomorrow, settle.sunset(year(tomorrow), month(tomorrow), day(tomorrow), dst_tomorrow));
-
-  Serial.println("Updating rise set");
-  Serial.println(sunrise);
-  Serial.println(sunset);
-  Serial.println(next_sunrise);
-  Serial.println(next_sunset);
 }
 
 time_t LightService::rise_set_to_time(time_t t, int rise_set) {

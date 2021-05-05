@@ -22,6 +22,10 @@ namespace light_controller {
   #define IDLE_UPDATE_FREQ 4000
   #define SCREEN_TIMEOUT 10000
 
+  #define DAILY_UPDATE_HOURS 0
+  #define DAILY_UPDATE_MINUTES 0
+  #define DAILY_UPDATE_SECONDS 5
+
   #define BUTTON_PIN_1 8
   #define BUTTON_PIN_2 9
   #define BUTTON_PIN_3 10

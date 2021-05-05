@@ -33,6 +33,17 @@ namespace light_controller {
     static AlarmID_t set_timer(AlarmID_t timer, int seconds, TimerEvent cb);
 
     /**
+     * @brief Set a new repeating alarm
+     * 
+     * @param timer a pointer to the variable in which the ID of the alarm should be stored
+     * @param hours the number of hours since midnight when the alarm should be triggered
+     * @param minutes the number of minutes since midnight when the alarm should be triggered
+     * @param seconds the number of seconds since midnight when the alarm should be triggered
+     * @param cb the function to call when the alarm is fired
+     */
+    static AlarmID_t set_repeating_alarm(AlarmID_t timer, int hours, int minutes, int seconds, TimerEvent cb);
+
+    /**
      * @brief Returns a number of days based on the month and year provided
      * 
      * @param month the month to check the number of days for

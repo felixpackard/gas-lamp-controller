@@ -45,6 +45,12 @@ namespace light_controller {
   void show_idle();
 
   /**
+   * @brief Handles the set time screen timing out or being closed
+   * 
+   */
+  void set_time_screen_timeout();
+
+  /**
    * @brief Handles button presses whilst the idle Screen is shown
    * 
    */
