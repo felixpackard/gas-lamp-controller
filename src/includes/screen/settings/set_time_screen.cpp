@@ -4,6 +4,7 @@ using namespace light_controller;
 void SetTimeScreen::init() {
   timer = millis();
   breakTime(now(), adjusted_time);
+  adjusted_time.Second = 0;
   AbstractScreen::init();
 }
 
